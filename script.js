@@ -7,9 +7,6 @@
         var movie = $("#movieInput").val();
         var queryURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
 
-
-
-        // Creating an AJAX call for the specific movie button being clicked
         $.ajax({
           url: queryURL,
           method: "GET"
@@ -37,7 +34,11 @@
           console.log(response.Poster);
           var leftPoster = $("<img>").attr('src', response.Poster);
           movieDiv.append(leftPoster);
-
+         
+          // Rating here:
+          console.log(response.Rated);
+          var leftRated = $("<p>").text("Rated: " + response.Rated);
+          movieDiv.append(leftRated);
 
 
           $("#LeftResults").append(movieDiv)
