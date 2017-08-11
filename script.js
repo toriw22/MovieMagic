@@ -12,9 +12,9 @@
           method: "GET"
         }).done(function(response) {
           console.log(response);
-          
 
           var movieDiv = $("<div>");
+         
           // Release Date here:
           console.log(response.Released);
           var leftRelease = $("<p>").text("Released: " + response.Released);
