@@ -4,9 +4,9 @@
 	<title>Movie Magic</title>
 </head>
 <body>
-<link rel="stylesheet" href="css/reset.css">
+<!-- <link rel="stylesheet" href="css/reset.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
+<!-- <link rel="stylesheet" href="css/style.css"> -->
 
 
 <!-- ========================= -->
@@ -33,7 +33,10 @@
         <div class="form-group">
           <input type="text" class="form-control" id="movieInput" placeholder="Movie Title or Actor">
         </div>
-        <button type="submit" id="button" class="btn btn-default">Submit</button>
+        <button type="submit" id="button" class="btn btn-default">Submit</button><br>
+        <input type="radio" name="searchType" id="movieSearch">Movie
+        <input type="radio" name="searchType" id="actorSearch">Actor/Actress
+        <input type="radio" name="searchType" id="keywordSearch">Keyword
       </form>
       <ul class="nav navbar-nav navbar-right">
         
@@ -47,9 +50,22 @@
 <!-- Panels for search Results -->
 <!-- ========================= -->
 
+<!-- Movie Database -->
+
+<div class="col-lg-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Movie Database Results</h3>
+    </div>
+    <div class="panel-body" id="TopResults">
+      Panel content
+    </div>
+  </div>
+</div>
+
 <!-- OMDB -->
 
-<div class="col-lg-5">
+<div class="col-lg-6">
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">OMDB Results</h3>
@@ -60,12 +76,9 @@
 	</div>
 </div>
 
-<div class="placeholder4 col-lg-2">
-</div>
-
 <!-- YouTube -->
 
-<div class="col-lg-5">
+<div class="col-lg-6">
 	<div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">YouTube Results</h3>
