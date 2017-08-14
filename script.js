@@ -15,4 +15,23 @@
         $("#movieInput").val("");
     });
 
-       
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+        
+    $(".navbar-brand").hover(function () {
+
+      $(this).removeClass("bounce").addClass("fadeIn").one(animationEnd, function() {
+            $(this).removeClass("fadeIn");
+            return this;
+          });
+    });
+
+
+    $("h3").hover(function () {
+      $(this).addClass("animated").addClass("shake").one(animationEnd, function() {
+            $(this).removeClass("shake");
+            return this;
+      });
+
+
+    });  
