@@ -7,7 +7,7 @@ var radio3 = document.getElementById("keywordSearch");
 
 //OMDB Query Function
 function omdbQuery () {
-  var queryURL = "https://www.omdbapi.com/?t=" + omdbSearch + "&y=&plot=short&apikey=40e9cece";
+  var queryURL = "http://www.omdbapi.com/?t=" + omdbSearch + "&y=&plot=short&apikey=40e9cece";
 
   $.ajax({
     url: queryURL,
@@ -27,6 +27,14 @@ function omdbQuery () {
     var leftPlot = $("<p>").text("Plot: " + response.Plot);
     movieDiv.append(leftPlot);
 
+    // Ratings here:
+    console.log(response.Ratings[0].Value);
+    var leftRatingsIMBD = $("<p>").text("IMDB: " + response.Ratings[0].Value);
+    movieDiv.append(leftRatingsIMBD);
+    console.log(response.Ratings[1].Value);
+    var leftRatingsRT = $("<p>").text("Rotten Tomatoes: " + response.Ratings[1].Value);
+    movieDiv.append(leftRatingsRT);
+
     // Actors here:
     console.log(response.Actors);
     var leftActors = $("<p>").text("Actors: " + response.Actors);
@@ -41,6 +49,8 @@ function omdbQuery () {
     console.log(response.Rated);
     var leftRated = $("<p>").text("Rated: " + response.Rated);
     movieDiv.append(leftRated);
+
+
 
     $("#LeftResults").html("");
     $("#LeftResults").append(movieDiv);
