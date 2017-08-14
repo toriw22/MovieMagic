@@ -184,3 +184,9 @@ var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
 
    });
 
+// Footer Update move to bottom
+  $(".btn").on("click", function() {
+      $(".footer").removeClass("footer").addClass("footerUpdate");
+
+  });
+
