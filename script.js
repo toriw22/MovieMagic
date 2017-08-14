@@ -7,7 +7,7 @@ var radio3 = document.getElementById("keywordSearch");
 
 //OMDB Query Function
 function omdbQuery () {
-  var queryURL = "http://www.omdbapi.com/?t=" + omdbSearch + "&y=&plot=short&apikey=40e9cece";
+  var queryURL = "https://www.omdbapi.com/?t=" + omdbSearch + "&y=&plot=short&apikey=40e9cece";
 
   $.ajax({
     url: queryURL,
