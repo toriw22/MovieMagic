@@ -47,6 +47,17 @@ body {
 
 }
 
+h3.headerButton {
+	text-decoration: underline;
+
+}
+
+h3.headerButton:hover {
+	font-style: italic;
+	color: #7BDDE5;
+
+}
+
 .footer {
   position: absolute;
   text-align: center;
