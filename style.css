@@ -1,6 +1,6 @@
 body {
 	background-image: url("moviemagic.jpg");
-	background-position: fixed;
+	background-attachment: fixed;
 
 }
 
@@ -17,7 +17,7 @@ body {
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
 	color: black;
 	font-size: 45px;
-	font-family: 'broadway';
+	font-family: 'Limelight', cursive;
 	margin-left: 15px;
 	padding-top: 23px;
 
