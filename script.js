@@ -29,12 +29,11 @@ function omdbQuery () {
     movieDiv.append(leftPlot);
 
     // Ratings here:
-    console.log(response.Ratings[0].Value);
-    var leftRatingsIMBD = $("<p>").text("IMDB: " + response.Ratings[0].Value);
-    movieDiv.append(leftRatingsIMBD);
-    console.log(response.Ratings[1].Value);
-    var leftRatingsRT = $("<p>").text("Rotten Tomatoes: " + response.Ratings[1].Value);
-    movieDiv.append(leftRatingsRT);
+    // console.log(response.Ratings[0].Value);
+    // var leftRatingsIMBD = $("<p>").text("IMDB: " + response.Ratings[0].Value);
+    // movieDiv.append(leftRatingsIMBD);
+    // var leftRatingsRT = $("<p>").text("Rotten Tomatoes: " + response.Ratings[1].Value);
+    // movieDiv.append(leftRatingsRT);
 
     // Actors here:
     console.log(response.Actors);
@@ -72,32 +71,53 @@ function movieDBQuery (){
   }).done(function(response) {
     console.log(response);
 
-    var result = response.results[0];
-    console.log(result);
+    var compiledResultsArray = [];
 
-    if (response.results.length <= 0) {
+    for (var i = 0; i < response.results.length; i++) {
+      if (isActor(response.results[i]) && radio1.checked || isMovie(response.results[i]) && radio2.checked) {
+        compiledResultsArray.push(response.results[i]);
+      }
+     
+      if (compiledResultsArray.length == 3) {
+        break;
+      } 
+
+    }
+
+    function isActor (result) {
+      return result.media_type == "person";
+  
+    }
+
+    function isMovie (result) {
+      return result.media_type == "movie";
+
+    }
+
+    if (compiledResultsArray.length  <= 0) {
       modal.style.display = "block";
       return;
     }
 
-    var totalCount = 2;
-    if (response.results.length <= 2) {
-      totalCount = response.results.length - 1;
-
-    }
 
     if(radio1.checked){
       $("#TopResults").html("");
       $("#TopResults").append("<h2>Top Movie Results for Actor/Actress " + movieDBSearch + ":</h2>");
 
-      for(var i = 0; i <= totalCount; i++){
-        
-        var header3 = $("<h3></h3>");
+      for(var i = 0; i < compiledResultsArray.length; i++){
+        var knownFor = compiledResultsArray[i].known_for;
 
-        $(header3).text(result.known_for[i].title + ": " + result.known_for[i].release_date);
-        $(header3).addClass("headerButton");
-        $(header3).attr("value", result.known_for[i].title);
-        $("#TopResults").append(header3);      
+        for (var j = 0; j < knownFor.length; j++) {
+          var header3 = $("<h3></h3>");
+          $(header3).html(knownFor[j].title + ": " + knownFor[j].release_date);
+          $(header3).addClass("headerButton");
+          $(header3).attr("value", knownFor[j].title);
+          $("#TopResults").append(header3);  
+
+        }
+
+        
+    
 
       }
     }
@@ -105,25 +125,25 @@ function movieDBQuery (){
       $("#TopResults").html("");
       $("#TopResults").append("<h2>Top Movie Results for keyword " + movieDBSearch + ":</h2>");
 
-      for(var i = 0; i <= totalCount; i++){
+      for(var i = 0; i <= compiledResultsArray.length; i++){
 
-        if(response.results[i].title == undefined){
+        if(compiledResultsArray[i].title == undefined){
           var header3 = $("<h3></h3>");
-          $(header3).text(response.results[i].name + ": " + response.results[i].release_date);
+          $(header3).text(compiledResultsArray[i].name + ": " + compiledResultsArray[i].release_date);
           $(header3).addClass("headerButton");
-          $(header3).attr("value", response.results[i].name);
+          $(header3).attr("value", compiledResultsArray[i].name);
           $("#TopResults").append(header3);
           
-          $("#TopResults").append("<p>" + response.results[i].overview + "</p>");  
+          $("#TopResults").append("<p>" + compiledResultsArray[i].overview + "</p>");  
         }
         else{
           var header3 = $("<h3></h3>");
-          $(header3).text(response.results[i].title + ": " + response.results[i].release_date);
+          $(header3).text(compiledResultsArray[i].title + ": " + compiledResultsArray[i].release_date);
           $(header3).addClass("headerButton");
-          $(header3).attr("value", response.results[i].title);
+          $(header3).attr("value", compiledResultsArray[i].title);
           $("#TopResults").append(header3);
 
-          $("#TopResults").append("<p>" + response.results[i].overview + "</p>");
+          $("#TopResults").append("<p>" + compiledResultsArray[i].overview + "</p>");
         }
 
       }
