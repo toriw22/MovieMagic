@@ -1,9 +1,10 @@
 //Variables
 var omdbSearch;
 var movieDBSearch;
-var radio1 = document.getElementById("movieSearch");
-var radio2 = document.getElementById("actorSearch");
-var radio3 = document.getElementById("keywordSearch");
+var radio1 = document.getElementById("actorSearch");
+var radio2 = document.getElementById("keywordSearch");
+var modal = document.getElementById("popUp");
+var span = document.getElementsByClassName("close")[0];
 
 //OMDB Query Function
 function omdbQuery () {
@@ -62,6 +63,7 @@ function movieDBQuery (){
   var apiKey = "15db597c6b1aa16dcb2b2844cefc6468";
   var queryURL = "https://api.themoviedb.org/3/search/multi?api_key=" + apiKey + "&language=en-US&query=" + movieDBSearch + "&page=1&include_adult=false";
 
+
   console.log(movieDBSearch);
 
   $.ajax({
@@ -73,27 +75,22 @@ function movieDBQuery (){
     var result = response.results[0];
     console.log(result);
 
-    if(radio1.checked){
-      $("#TopResults").html("");
-      $("#TopResults").append("<h2>Movie Result:</h2>");
-
-    
-      if(result.title == undefined){
-        $("#TopResults").append("<h3>" + result.name + ": " + result.release_date + "</h3>");
-        $("#headerButton").attr("value", result.name);
-        $("#TopResults").append("<p>" + result.overview + "</p>"); 
-      }
-      else{
-        $("#TopResults").append("<h3>" + result.title + ": " + result.release_date + "</h3>");
-        $("#headerButton").attr("value", result.title);
-        $("#TopResults").append("<p>" + result.overview + "</p>");
-      }  
+    if (response.results.length <= 0) {
+      modal.style.display = "block";
+      return;
     }
-    else if(radio2.checked){
+
+    var totalCount = 2;
+    if (response.results.length <= 2) {
+      totalCount = response.results.length - 1;
+
+    }
+
+    if(radio1.checked){
       $("#TopResults").html("");
       $("#TopResults").append("<h2>Top Movie Results for Actor/Actress " + movieDBSearch + ":</h2>");
 
-      for(var i = 0; i <= 2; i++){
+      for(var i = 0; i <= totalCount; i++){
         
         var header3 = $("<h3></h3>");
 
@@ -104,11 +101,11 @@ function movieDBQuery (){
 
       }
     }
-    else if(radio3.checked){
+    else if(radio2.checked){
       $("#TopResults").html("");
       $("#TopResults").append("<h2>Top Movie Results for keyword " + movieDBSearch + ":</h2>");
 
-      for(var i = 0; i <= 2; i++){
+      for(var i = 0; i <= totalCount; i++){
 
         if(response.results[i].title == undefined){
           var header3 = $("<h3></h3>");
@@ -131,9 +128,6 @@ function movieDBQuery (){
 
       }
 
-    }
-    else{
-      console.log("No radio button clicked");
     }
 
     $(".headerButton").on("click", function(){
@@ -163,8 +157,6 @@ $("#button").on("click", function(){
   }
   else{
     $("#LeftResults").html("");
-    console.log("Radio1 button not checked");
-
     movieDBSearch = $("#movieInput").val().trim();
     movieDBQuery();
   }
@@ -199,4 +191,17 @@ var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
       $(".footer").removeClass("footer").addClass("footerUpdate");
 
   });
+
+// modal Controls
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 
