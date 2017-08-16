@@ -154,6 +154,8 @@ function movieDBQuery (){
 
    $(".headerButton").on("click", function(){
     event.preventDefault();
+    $('#LeftResults').html('');
+    $('#videoPlayer').hide();
     var tempVar = this;
     console.log(tempVar);
 
@@ -189,6 +191,10 @@ function youtubeQuery() {
 //Search Button onClick
 $("#button").on("click", function(){
   event.preventDefault();
+  $('#TopResults').html('');
+  $('#LeftResults').html('');
+  $('#videoPlayer').hide();
+
   if(radio1.checked){
     console.log("Radio1 button checked");
     omdbSearch = $("#movieInput").val().trim();
@@ -246,4 +252,5 @@ window.onclick = function(event) {
     }
 }
 
+//Initially hide iFrame
 $('#videoPlayer').hide();
