@@ -28,12 +28,12 @@ function omdbQuery () {
     var leftPlot = $("<p>").text("Plot: " + response.Plot);
     movieDiv.append(leftPlot);
 
-    // Ratings here:
-    // console.log(response.Ratings[0].Value);
-    // var leftRatingsIMBD = $("<p>").text("IMDB: " + response.Ratings[0].Value);
-    // movieDiv.append(leftRatingsIMBD);
-    // var leftRatingsRT = $("<p>").text("Rotten Tomatoes: " + response.Ratings[1].Value);
-    // movieDiv.append(leftRatingsRT);
+    //Ratings here:
+    console.log(response.Ratings[0].Value);
+    var leftRatingsIMBD = $("<p>").text("IMDB: " + response.Ratings[0].Value);
+    movieDiv.append(leftRatingsIMBD);
+    var leftRatingsRT = $("<p>").text("Rotten Tomatoes: " + response.Ratings[1].Value);
+    movieDiv.append(leftRatingsRT);
 
     // Actors here:
     console.log(response.Actors);
@@ -84,6 +84,8 @@ function movieDBQuery (){
 
     }
 
+    console.log(compiledResultsArray);  
+
     function isActor (result) {
       return result.media_type == "person";
   
@@ -112,20 +114,18 @@ function movieDBQuery (){
           $(header3).html(knownFor[j].title + ": " + knownFor[j].release_date);
           $(header3).addClass("headerButton");
           $(header3).attr("value", knownFor[j].title);
-          $("#TopResults").append(header3);  
-
+          $("#TopResults").append(header3);   
         }
-
-        
-    
-
       }
+
     }
     else if(radio2.checked){
       $("#TopResults").html("");
       $("#TopResults").append("<h2>Top Movie Results for keyword " + movieDBSearch + ":</h2>");
 
-      for(var i = 0; i <= compiledResultsArray.length; i++){
+      console.log(compiledResultsArray[0].title);
+
+      for(var i = 0; i < compiledResultsArray.length; i++){
 
         if(compiledResultsArray[i].title == undefined){
           var header3 = $("<h3></h3>");
@@ -144,21 +144,21 @@ function movieDBQuery (){
           $("#TopResults").append(header3);
 
           $("#TopResults").append("<p>" + compiledResultsArray[i].overview + "</p>");
-        }
+        }        
 
       }
 
     }
 
-    $(".headerButton").on("click", function(){
-      event.preventDefault();
-      var tempVar = this;
-      console.log(tempVar);
+   $(".headerButton").on("click", function(){
+    event.preventDefault();
+    var tempVar = this;
+    console.log(tempVar);
 
-      omdbSearch = $(tempVar).attr("value");
-      console.log(omdbSearch);
-      omdbQuery();
-    })  
+    omdbSearch = $(tempVar).attr("value");
+    console.log(omdbSearch);
+    omdbQuery();
+  })    
 
   })
 
@@ -209,7 +209,6 @@ var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimation
 // Footer Update move to bottom
   $(".btn").on("click", function() {
       $(".footer").removeClass("footer").addClass("footerUpdate");
-
   });
 
 // modal Controls
