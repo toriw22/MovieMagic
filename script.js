@@ -156,6 +156,8 @@ function movieDBQuery (){
     event.preventDefault();
     $('#LeftResults').html('');
     $('#videoPlayer').hide();
+    $('.youtubeButton').remove();
+    
     var tempVar = this;
     console.log(tempVar);
 
@@ -204,6 +206,7 @@ $("#button").on("click", function(){
   $('#TopResults').html('');
   $('#LeftResults').html('');
   $('#videoPlayer').hide();
+  $('.youtubeButton').remove();
 
   if(radio1.checked){
     console.log("Radio1 button checked");
