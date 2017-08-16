@@ -183,7 +183,7 @@ function youtubeQuery() {
   request.execute(function(response) {
     console.log(response);
     for(var i = 0; i < response.result.items.length; i++){
-      var h = $('<p>');
+      var p = $('<p>');
       p.attr('class', 'youtubeButton');
       p.attr('videoID', response.result.items[i].id['videoId']);
       p.text(response.result.items[i].snippet['title']);
