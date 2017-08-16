@@ -195,8 +195,8 @@ function youtubeQuery() {
       $('#videoPlayer').attr('src', 'https://www.youtube.com/embed/' + videoID);
       $('#videoPlayer').show();
     })
-})
-
+  })
+}
 
 //Search Button onClick
 $("#button").on("click", function(){
