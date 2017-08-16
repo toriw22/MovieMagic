@@ -207,12 +207,9 @@ $("#button").on("click", function(){
 
   if(radio1.checked){
     console.log("Radio1 button checked");
-    omdbSearch = $("#movieInput").val().trim();
-    movieDBSearch = omdbSearch;
-    youtubeSearch = movieDBSearch;
-    omdbQuery();
+    movieDBSearch = $("#movieInput").val().trim();
     movieDBQuery();
-    youtubeQuery();
+
   }
   else{
     $("#LeftResults").html("");
