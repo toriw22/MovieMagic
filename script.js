@@ -1,10 +1,12 @@
 //Variables
 var omdbSearch;
 var movieDBSearch;
+var youtubeSearch;
 var radio1 = document.getElementById("actorSearch");
 var radio2 = document.getElementById("keywordSearch");
 var modal = document.getElementById("popUp");
 var span = document.getElementsByClassName("close")[0];
+var videoID;
 
 //OMDB Query Function
 function omdbQuery () {
@@ -156,12 +158,31 @@ function movieDBQuery (){
     console.log(tempVar);
 
     omdbSearch = $(tempVar).attr("value");
+    youtubeSearch = omdbSearch;
     console.log(omdbSearch);
     omdbQuery();
+    youtubeQuery();
   })    
 
   })
 
+}
+
+//Youtube Query Function
+function youtubeQuery() {
+
+  var request = gapi.client.youtube.search.list({
+    q: youtubeSearch,
+    part: 'snippet'
+  });
+
+  request.execute(function(response) {
+    console.log(response.result);
+    videoID = response.result.items[0].id['videoId'];
+    console.log(videoID);
+    $('#videoPlayer').attr('src', 'https://www.youtube.com/embed/' + videoID);
+    $('#videoPlayer').show();
+  });
 }
 
 
@@ -172,8 +193,10 @@ $("#button").on("click", function(){
     console.log("Radio1 button checked");
     omdbSearch = $("#movieInput").val().trim();
     movieDBSearch = omdbSearch;
+    youtubeSearch = movieDBSearch;
     omdbQuery();
     movieDBQuery();
+    youtubeQuery();
   }
   else{
     $("#LeftResults").html("");
@@ -223,4 +246,4 @@ window.onclick = function(event) {
     }
 }
 
-
+$('#videoPlayer').hide();
