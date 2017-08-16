@@ -157,7 +157,7 @@ function movieDBQuery (){
     $('#LeftResults').html('');
     $('#videoPlayer').hide();
     $('.youtubeButton').remove();
-    
+
     var tempVar = this;
     console.log(tempVar);
 
@@ -183,7 +183,7 @@ function youtubeQuery() {
   request.execute(function(response) {
     console.log(response);
     for(var i = 0; i < response.result.items.length; i++){
-      var p = $('<p>');
+      var h = $('<p>');
       p.attr('class', 'youtubeButton');
       p.attr('videoID', response.result.items[i].id['videoId']);
       p.text(response.result.items[i].snippet['title']);

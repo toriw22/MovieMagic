@@ -58,6 +58,11 @@ h3.headerButton:hover {
 
 }
 
+p.youtubeButton:hover {
+	font-style: italic;
+	color: #7BDDE5;
+}
+
 .footer {
   position: absolute;
   text-align: center;
@@ -112,5 +117,9 @@ p {
 .close:focus {
 	color: black;
 	cursor: pointer;
+
+}
+
+h2{
 
 }
